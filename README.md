@@ -26,13 +26,31 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 # 创建命名空间
 kubectl create namespace paas
 
+# 安装ingress
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace -f ingress-nginx-values.yaml
+
+kubectl create ingress demo-localhost --class=nginx  --rule=gitlab.localhost/*=demo:80
 # 安装 gitlab
 helm repo add gitlab https://charts.gitlab.io/
+helm repo update
+helm install gitlab gitlab/gitlab  --set global.hosts.domain=localhost  --set certmanager-issuer.email=me@example.com --namespace paas --create-namespace -f gitlab-values.yaml
 
-helm install gitlab gitlab/gitlab \
-  --set global.hosts.domain=localhost \
-  --set certmanager-issuer.email=me@example.com \
-  -n paas
+# 安装  prometheus
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace paas --create-namespace -f kube-prometheus-stack-values.yaml
+
+# 安装  rabbitmq
+
+# 安装  mysql
+
+# 安装  elasticsearch
+
+# 安装  redis
+
+
 ```
 
 ## 相关文档
