@@ -26,9 +26,11 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 # 创建命名空间
 kubectl create namespace paas
 
-helm  dependency update ./charts/netcorepal-paas
+helm dependency update ./charts/netcorepal-paas
 
 helm install netcorepal-paas  ./charts/netcorepal-paas --namespace paas --create-namespace
+
+helm upgrade netcorepal-paas  ./charts/netcorepal-paas --namespace paas --create-namespace
 
 helm uninstall netcorepal-paas --namespace paas
 # 安装ingress
@@ -56,7 +58,7 @@ helm uninstall kube-prometheus-stack --namespace paas
 
 # 安装  redis
 
-# 获取默认密码
+# 获取root默认密码
 kubectl get secret netcorepal-paas-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
 
