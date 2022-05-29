@@ -30,4 +30,4 @@ dependencies:
     version: 35.4.2
   - name: gitlab
     repository: https://charts.gitlab.io/
-    version: 5.10.3
+    version: 6.0.0

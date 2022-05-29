@@ -26,6 +26,8 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 # 创建命名空间
 kubectl create namespace paas
 
+helm  dependency update ./charts/netcorepal-paas
+
 helm install netcorepal-paas  ./charts/netcorepal-paas --namespace paas --create-namespace
 
 helm uninstall netcorepal-paas --namespace paas
@@ -54,14 +56,20 @@ helm uninstall kube-prometheus-stack --namespace paas
 
 # 安装  redis
 
-
+# 获取默认密码
+kubectl get secret netcorepal-paas-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
+
+grafana:   admin   prom-operator
+
 
 ## 相关文档
 
 使用helm安装gitlab
 
 <https://docs.gitlab.com/charts/>
+
+<https://docs.gitlab.com/charts/installation/secrets.html#initial-root-password>
 
 <https://docs.gitlab.com/charts/quickstart/index.html#installing-kubectl>
 
