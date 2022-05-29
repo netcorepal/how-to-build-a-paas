@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHealthChecks();
 builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 var app = builder.Build();
 
@@ -20,4 +21,5 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.MapReverseProxy();
+app.MapHealthChecks("/healthz");
 app.Run();
