@@ -387,7 +387,7 @@ runners:
   ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#using-dockerdind
   ##
   ## DEPRECATED: See https://docs.gitlab.com/runner/install/kubernetes.html#additional-configuration
-  privileged: true
+  privileged: false
 
   ## The name of the secret containing runner-token and runner-registration-token
   # secret: gitlab-runner
@@ -703,9 +703,16 @@ volumes: []
 
 global:
   ingress:
-    enabled: false
-    class: nginx
+    enabled: true
+    class: netcorepal-paas
     tls:
       enabled: false
   hosts:
     https: false
+  grafana: 
+      enabled: false
+
+nginx-ingress:
+  controller:
+    hostPort:
+      enable: true

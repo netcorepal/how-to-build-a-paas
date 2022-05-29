@@ -60,6 +60,9 @@ helm uninstall kube-prometheus-stack --namespace paas
 ## 相关文档
 
 使用helm安装gitlab
+
+<https://docs.gitlab.com/charts/>
+
 <https://docs.gitlab.com/charts/quickstart/index.html#installing-kubectl>
 
 <https://microsoft.github.io/reverse-proxy/articles/config-files.html>
