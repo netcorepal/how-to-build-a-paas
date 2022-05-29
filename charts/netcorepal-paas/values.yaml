@@ -116,3 +116,8 @@ nginx-ingress:
   controller:
     hostPort:
       enable: true
+      ports:
+      # -- 'hostPort' http port
+      http: 80
+      # -- 'hostPort' https port
+      https: 443
