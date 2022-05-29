@@ -1,0 +1,9 @@
+dependencies:
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 35.4.2
+- name: gitlab
+  repository: https://charts.gitlab.io/
+  version: 5.10.3
+digest: sha256:ef51ce5db14ae2dfb5baa7a169b530a600b6996d9e855bd14a9466fced71a979
+generated: "2022-05-29T14:54:57.5062032+08:00"

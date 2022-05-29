@@ -92,3 +92,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+
+gitlab: 
+  global:
+    ingress:
+      enabled: false
+      tls:
+        enabled: false
+    hosts:
+      https: false
+      domain: localhost
+  certmanager-issuer:
+    email: me@example.com
