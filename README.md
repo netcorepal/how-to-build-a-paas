@@ -26,6 +26,9 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 # 创建命名空间
 kubectl create namespace paas
 
+helm install netcorepal-paas  ./charts/netcorepal-paas --namespace paas --create-namespace
+
+helm uninstall netcorepal-paas --namespace paas
 # 安装ingress
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -42,6 +45,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace paas --create-namespace -f kube-prometheus-stack-values.yaml
 
+helm uninstall kube-prometheus-stack --namespace paas
 # 安装  rabbitmq
 
 # 安装  mysql

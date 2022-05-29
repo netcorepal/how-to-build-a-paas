@@ -703,7 +703,7 @@ volumes: []
 
 global:
   ingress:
-    enabled: true
+    enabled: false
     class: nginx
     tls:
       enabled: false
