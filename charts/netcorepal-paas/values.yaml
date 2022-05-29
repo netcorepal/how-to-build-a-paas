@@ -106,7 +106,7 @@ gitlab:
       https: false
       domain: localhost
     grafana: 
-      enabled: true
+      enabled: false
   certmanager-issuer:
     email: me@example.com
   runners:
