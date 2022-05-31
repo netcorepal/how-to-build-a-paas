@@ -22,6 +22,18 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 ### 安装paas平台
 
 ```shell
+# 安装
+git clone https://github.com/netcorepal/how-to-build-a-paas.git
+cd how-to-build-a-paas
+helm install my-pass  ./charts/netcorepal-paas --namespace paas --create-namespace
+
+# 卸载
+helm uninstall my-pass  --namespace paas
+
+
+
+
+
 
 # 创建命名空间
 kubectl create namespace paas

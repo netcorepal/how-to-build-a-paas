@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/netcorepal/how-to-build-a-paas
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "main"
 
@@ -100,6 +100,7 @@ gitlab:
     ingress:
       enabled: false
       class: netcorepal-pass
+      configureCertmanager: false
       tls:
         enabled: false
     hosts:
@@ -107,11 +108,22 @@ gitlab:
       domain: localhost
     grafana: 
       enabled: false
+  gitlab:
+    webservice:
+      fullnameOverride: gitlab-webservice
   certmanager-issuer:
     email: me@example.com
   runners:
     privileged: true
-
+  prometheus:
+    install: false
+  certmanager:
+    install: false
+  gitlab-runner:
+    install: false
+kube-prometheus-stack:
+  grafana:
+    fullnameOverride: grafana
 nginx-ingress:
   controller:
     hostPort:
