@@ -70,12 +70,30 @@ helm uninstall kube-prometheus-stack --namespace paas
 
 # 安装  redis
 
-# 获取root默认密码
+# 获取gitlab root默认密码
+
+```
+
+## 如何访问
+
+添加域名到hosts文件
+
+```txt
+127.0.0.1  gitlab.localhost
+127.0.0.1  grafana.localhost
+127.0.0.1  alertmanager.localhost
+127.0.0.1  prometheus.localhost
+```
+
+gitlab：  <http://gitlab.localhost>   用户名：`root`  密码： 使用命令获取：
+
+```sh
 kubectl get secret netcorepal-paas-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
 
-grafana:   admin   prom-operator
-
+grafana:   <http://grafana.localhost>  用户名：`admin`  密码：`prom-operator` 
+prometheus: <http://prometheus.localhost>
+alertmanager: <http://alertmanager.localhost>
 
 ## 相关文档
 
