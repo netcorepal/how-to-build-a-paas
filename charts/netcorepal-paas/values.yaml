@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/netcorepal/how-to-build-a-paas
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "main"
 
@@ -47,19 +47,19 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "false"
   hosts:
-    - host: gitlab.localhost
+    - host: dev.gitlab.localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
-    - host: grafana.localhost
+    - host: dev.grafana.localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
-    - host: alertmanager.localhost
+    - host: dev.alertmanager.localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
-    - host: prometheus.localhost
+    - host: dev.prometheus.localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -93,12 +93,10 @@ tolerations: []
 
 affinity: {}
 
-
-
 gitlab: 
   global:
     ingress:
-      enabled: false
+      enabled: true
       class: netcorepal-pass
       configureCertmanager: false
       tls:
@@ -108,22 +106,39 @@ gitlab:
       domain: localhost
     grafana: 
       enabled: false
-  gitlab:
-    webservice:
-      fullnameOverride: gitlab-webservice
+  #gitlab:
+    #webservice:
+      #fullnameOverride: gitlab-webservice
   certmanager-issuer:
     email: me@example.com
-  runners:
-    privileged: true
   prometheus:
     install: false
   certmanager:
     install: false
   gitlab-runner:
-    install: false
+    install: true
+    privileged: true
+    gitlabUrl: http://my-paas-webservice-default:8181/
 kube-prometheus-stack:
   grafana:
     fullnameOverride: grafana
+    ingress:
+      enabled: true
+      ingressClassName: netcorepal-pass
+      hosts:
+       - grafana.localhost
+  prometheus:
+    ingress:
+      enabled: true
+      ingressClassName: netcorepal-pass
+      hosts:
+       - prometheus.localhost
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: netcorepal-pass
+      hosts:
+       - alertmanager.localhost
 nginx-ingress:
   controller:
     hostPort:

@@ -25,10 +25,10 @@ docker run -it -v ~/.kube/config:/root/.kube2/config paas-install:master
 # 安装
 git clone https://github.com/netcorepal/how-to-build-a-paas.git
 cd how-to-build-a-paas
-helm install my-pass  ./charts/netcorepal-paas --namespace paas --create-namespace
+helm install my-paas  ./charts/netcorepal-paas --namespace paas --create-namespace
 
 # 卸载
-helm uninstall my-pass  --namespace paas
+helm uninstall my-paas  --namespace paas
 
 
 
@@ -71,6 +71,13 @@ helm uninstall kube-prometheus-stack --namespace paas
 # 安装  redis
 
 # 获取gitlab root默认密码
+
+
+# 安装 runner
+
+helm repo add gitlab https://charts.gitlab.io
+
+helm install --namespace paas gitlab-runner -f gitlab-runner-values.yaml gitlab/gitlab-runner
 
 ```
 
