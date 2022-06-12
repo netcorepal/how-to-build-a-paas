@@ -221,12 +221,12 @@ alertmanager:
   #       {{ end }}
 
   ingress:
-    enabled: false
+    enabled: true
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     # ingressClassName: nginx
-    ingressClassName: nginx
+    ingressClassName: yarp
     annotations: {}
 
     labels: {}
@@ -680,16 +680,18 @@ grafana:
   ingress:
     ## If true, Grafana Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## IngressClassName for Grafana Ingress.
     ## Should be provided if Ingress is enable.
     ##
     # ingressClassName: nginx
-    ingressClassName: nginx
+    ingressClassName: yarp
     ## Annotations for Grafana Ingress
     ##
-    annotations: {}
+    annotations: 
+      yarp.ingress.kubernetes.io/transforms: |
+        - RequestHeaderOriginalHost: true
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
 
@@ -1954,7 +1956,7 @@ prometheus:
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     # ingressClassName: nginx
-    ingressClassName: nginx
+    ingressClassName: yarp
     annotations: {}
     labels: {}
     servicePort: 10901
@@ -1999,12 +2001,12 @@ prometheus:
   #     someoneelse:$apr1$DMZX2Z4q$6SbQIfyuLQd.xmo/P0m2c.
 
   ingress:
-    enabled: false
+    enabled: true
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     # ingressClassName: nginx
-    ingressClassName: nginx
+    ingressClassName: yarp
     annotations: {}
     labels: {}
 
